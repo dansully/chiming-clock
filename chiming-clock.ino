@@ -45,7 +45,7 @@ int chimes = 0; // 0 --> Chimes on, 1 --> Day only, 2 --> Chimes off
 
 
 // Setup analog switches
-AnalogButtons switchHour(switchHourPin, INPUT);
+AnalogButtons switchHour(switchHourPin, INPUT, 5, 30);
 void fnHourAdvance() {
   DateTime now = rtc.now();
   rtc.adjust(now+TimeSpan(0,1,0,0));
@@ -57,7 +57,7 @@ void fnHourRetard() {
 Button buttonHourAdvance = Button(1007, &fnHourAdvance);
 Button buttonHourRetard = Button(11, &fnHourRetard);
 
-AnalogButtons switchMinute(switchMinutePin, INPUT);
+AnalogButtons switchMinute(switchMinutePin, INPUT, 5, 30);
 void fnMinuteAdvance() {
   DateTime now = rtc.now();
   rtc.adjust(now+TimeSpan(0,0,1,0));
@@ -69,14 +69,14 @@ void fnMinuteRetard() {
 Button buttonMinuteAdvance = Button(1007, &fnMinuteAdvance);
 Button buttonMinuteRetard = Button(11, &fnMinuteRetard);
 
-AnalogButtons switchMinuteHold(switchMinuteHoldPin, INPUT);
+AnalogButtons switchMinuteHold(switchMinuteHoldPin, INPUT, 5, 30);
 void fnMinuteHold() {
   DateTime now = rtc.now();
   rtc.adjust(now+TimeSpan(0,0,0,-now.second()));
   }
 Button buttonMinuteHold = Button(1007, &fnMinuteHold);
 
-AnalogButtons switchChimes(switchChimesPin, INPUT);
+AnalogButtons switchChimes(switchChimesPin, INPUT, 5, 30);
 void fnChimesOn() {
   chimes = 0;
   }
@@ -90,7 +90,7 @@ Button buttonChimesOn = Button(1007, &fnChimesOn);
 Button buttonChimesDay = Button(512, &fnChimesDay);
 Button buttonChimesOff = Button(11, &fnChimesOff);
 
-AnalogButtons switchDisplay(switchDisplayPin, INPUT);
+AnalogButtons switchDisplay(switchDisplayPin, INPUT, 5, 30);
 void fnDisplayOn() {
   display.setBacklight(10);
   }
@@ -149,15 +149,6 @@ void setup () {
 }
 
 void loop () {
-//    display.print("POO ");
-//    delay(250);
-//    display.print("OO P");
-//    delay(250);
-//    display.print("O PO");
-//    delay(250);
-//    display.print(" POO");
-//    delay(250);  
-
     switchHour.check();
     //switchMinute.check();
     //switchMinuteHold.check();
